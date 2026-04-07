@@ -1,0 +1,21 @@
+<section class="page">
+  <h1 class="page-title">Online Store</h1>
+  <p class="page-subtitle">
+    Real products catalog from Kaspi.kz
+  </p>
+
+  @if (products().length === 0) {
+    <div class="empty-message">
+      No products in this category.
+    </div>
+  } @else {
+    <div class="product-grid">
+      @for (item of products(); track item.id) {
+        <app-product-card
+          [product]="item"
+          (delete)="onDelete($event)"
+        ></app-product-card>
+      }
+    </div>
+  }
+</section>

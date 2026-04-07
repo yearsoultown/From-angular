@@ -1,0 +1,29 @@
+<div class="page">
+  <header class="hero">
+    <h1>Online Store</h1>
+    <p>Select a category to view products.</p>
+  </header>
+
+  <section class="categories">
+    @for (category of categories; track category.id) {
+      <button
+        class="category-btn"
+        [class.active]="selectedCategoryId === category.id"
+        (click)="selectCategory(category.id)"
+      >
+        {{ category.name }}
+      </button>
+    }
+  </section>
+
+  @if (selectedCategoryId === null) {
+    <div class="message-box">
+      <p>Please select a category.</p>
+    </div>
+  } @else {
+    <app-product-list
+      [products]="filteredProducts"
+      (delete)="deleteProduct($event)"
+    ></app-product-list>
+  }
+</div>

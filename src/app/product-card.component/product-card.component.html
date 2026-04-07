@@ -1,0 +1,72 @@
+<div class="product-card">
+  <div class="image-wrapper">
+    <img
+      [src]="selectedImage"
+      [alt]="product().name"
+      class="main-image"
+    />
+  </div>
+
+  <div class="gallery">
+    @for (img of product().images; track img; let i = $index) {
+      <button
+        class="thumbnail"
+        [class.active]="selectedImage === img"
+        (click)="changeImage(img)"
+      >
+        <img [src]="img" [alt]="product().name + ' image ' + (i + 1)" />
+      </button>
+    }
+  </div>
+
+  <div class="gallery-controls">
+    <button class="small-btn" (click)="prevImage()">Previous</button>
+    <button class="small-btn" (click)="nextImage()">Next</button>
+  </div>
+
+  <h2 class="product-title">{{ product().name }}</h2>
+
+  <p class="product-description">
+    {{ product().description }}
+  </p>
+
+  <div class="price">
+    {{ product().price | currency:'KZT':'symbol-narrow':'1.0-0' }}
+  </div>
+
+  <div class="rating">
+    <span class="stars">{{ getStars(product().rating) }}</span>
+    <span class="rating-value">{{ product().rating }}/5</span>
+  </div>
+
+  <div class="likes-row">
+    <span class="likes-count">❤ {{ product().likes }}</span>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-like" (click)="likeProduct()">
+      Like
+    </button>
+
+    <button class="btn btn-delete" (click)="deleteProduct()">
+      Delete
+    </button>
+
+    <a
+      class="btn btn-primary"
+      [href]="product().link"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Open in Kaspi
+    </a>
+
+    <button class="btn btn-success" (click)="shareOnWhatsApp()">
+      Share to WhatsApp
+    </button>
+
+    <button class="btn btn-info" (click)="shareOnTelegram()">
+      Share to Telegram
+    </button>
+  </div>
+</div>
